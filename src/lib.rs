@@ -7491,8 +7491,10 @@ mod test {
             assert_eq!(ContractError::from_code(variant.code()), Some(variant));
         }
         assert_eq!(ContractError::from_code(0), None);
-        // 30 is one past the highest assigned variant (AttestationRequired = 29):
-        assert_eq!(ContractError::from_code(30), None);
+        assert_eq!(
+            ContractError::from_code(30),
+            Some(ContractError::NetworkMismatch)
+        );
     }
 
     // --- Issue #69: max username length guard ---
